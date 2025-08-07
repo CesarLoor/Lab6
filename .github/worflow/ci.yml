@@ -1,0 +1,26 @@
+name: CI/CD workflow
+
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Lint del codigo
+        run: npm run lint
+
+      - name: Ejecutar pruebas
+        run: npm run test
+
+      - name: Simular despliegue
+        run: npm run start
+      
+
