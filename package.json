@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
     "start": "node index.js",
     "lint": "npx eslint ."
-
   },
   "keywords": [],
   "author": "",

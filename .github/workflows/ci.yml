@@ -38,12 +38,15 @@ jobs:
         run: npm test
         env:
           CI: true
+          NODE_OPTIONS: --experimental-vm-modules
         continue-on-error: false
 
-      - name: Build and Start (simulated deployment)
+      - name: Start server and test
         run: |
-          npm run build --if-present
-          npm start & 
+          npm install -g wait-on
+          npm start &
           npx wait-on http://localhost:3000
           curl http://localhost:3000
+        env:
+          NODE_OPTIONS: --experimental-vm-modules
         continue-on-error: false
