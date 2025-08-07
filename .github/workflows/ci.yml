@@ -1,32 +1,49 @@
 name: CI/CD workflow
-on: 
+
+on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
 jobs:
   build-and-test:
-      runs-on: ubuntu-latest
-      steps:
-        - name: clonar repositorio
-          uses: actions/checkout@v4
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        - name: Configurar Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
-        - name: Instalar dependencias
-          run: npm install
+      - name: Verify Node.js version
+        run: node --version
+        continue-on-error: false
 
-        - name: Lint del codigo
-          run: npm run lint
+      - name: Install dependencies
+        run: npm ci
+        continue-on-error: false
 
-        - name: Ejecutar pruebas
-          run: npm run test
+      - name: Run Linter
+        run: npm run lint
+        continue-on-error: false
 
-        - name: Simular despliegue
-          run: npm run start
-        
-      
+      - name: Run Tests
+        run: npm test
+        env:
+          CI: true
+        continue-on-error: false
 
+      - name: Build and Start (simulated deployment)
+        run: |
+          npm run build --if-present
+          npm start & 
+          npx wait-on http://localhost:3000
+          curl http://localhost:3000
+        continue-on-error: false
