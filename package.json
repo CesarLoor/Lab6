@@ -5,14 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest '**/*.test.js'",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest",
     "start": "node index.js",
     "lint": "npx eslint ."
   },
   "jest": {
-    "transform": {},
     "testEnvironment": "node",
-    "extensionsToTreatAsEsm": [".js"]
+    "transform": {}
   },
   "keywords": [],
   "author": "",
