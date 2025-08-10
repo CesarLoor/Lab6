@@ -6,7 +6,9 @@ export default [
       sourceType: 'module',
     },
     rules: {
-      semi: ['error', 'always']
+      semi: ['error', 'always'],
+      quotes: ['error', 'single']
     },
   },
 ];
+
