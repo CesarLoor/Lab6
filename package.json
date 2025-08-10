@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest '**/*.test.js'",
     "start": "node index.js",
     "lint": "npx eslint ."
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "node",
+    "extensionsToTreatAsEsm": [".js"]
   },
   "keywords": [],
   "author": "",
@@ -17,6 +23,5 @@
   "devDependencies": {
     "eslint": "^9.32.0",
     "jest": "^30.0.5"
-  },
-  "type": "module"
+  }
 }
