@@ -1,4 +1,4 @@
-const { factorial, fibonacci } = require('./math');
+const { factorial, fibonacci } = require('./math.js');
 
 test('factorial de 5 es 120', () => {
   expect(factorial(5)).toBe(120);
